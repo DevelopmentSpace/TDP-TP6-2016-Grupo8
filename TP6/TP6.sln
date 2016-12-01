@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJ1-", "EJ1-\EJ1-.csproj", "{484824C7-76AD-4DE7-8CDD-263F7420909B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJ1", "EJ1-\EJ1.csproj", "{484824C7-76AD-4DE7-8CDD-263F7420909B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJ2", "EJ2\EJ2.csproj", "{E5BD70BF-CAE3-40A2-A5BF-FC1F85267526}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{484824C7-76AD-4DE7-8CDD-263F7420909B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{484824C7-76AD-4DE7-8CDD-263F7420909B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{484824C7-76AD-4DE7-8CDD-263F7420909B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5BD70BF-CAE3-40A2-A5BF-FC1F85267526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5BD70BF-CAE3-40A2-A5BF-FC1F85267526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5BD70BF-CAE3-40A2-A5BF-FC1F85267526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5BD70BF-CAE3-40A2-A5BF-FC1F85267526}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C46711DA-8591-4810-90B4-108959650920}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{9E5FB8AB-EE66-48B1-A2B7-1277231DE171}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EJ1</RootNamespace>
-    <AssemblyName>EJ1</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>AccountManager</RootNamespace>
+    <AssemblyName>AccountManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -37,6 +37,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.IndexingExtensions, Version=1.0.1.26117, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.IndexingExtensions.1.0.1\lib\net40\EntityFramework.IndexingExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
@@ -48,43 +52,33 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="DAL\EntityFramework\AccountManagerDbContext.cs" />
+    <Compile Include="DAL\EntityFramework\AccountRepository.cs" />
+    <Compile Include="DAL\EntityFramework\ClientRepository.cs" />
+    <Compile Include="DAL\EntityFramework\DatabaseInitializationStrategy.cs" />
+    <Compile Include="DAL\EntityFramework\Mappings\AccountMap.cs" />
+    <Compile Include="DAL\EntityFramework\Mappings\AccountMovementMap.cs" />
+    <Compile Include="DAL\EntityFramework\Mappings\ClientMap.cs" />
+    <Compile Include="DAL\EntityFramework\Repository.cs" />
+    <Compile Include="DAL\EntityFramework\UnitOfWork.cs" />
+    <Compile Include="DAL\IAccountRepository.cs" />
+    <Compile Include="DAL\IClientRepository.cs" />
+    <Compile Include="DAL\IRepository.cs" />
+    <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="Domain\Account.cs" />
+    <Compile Include="Domain\AccountMovement.cs" />
+    <Compile Include="Domain\Client.cs" />
+    <Compile Include="Domain\Document.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
