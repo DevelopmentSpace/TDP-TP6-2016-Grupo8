@@ -97,6 +97,12 @@
     <Compile Include="FormCuentas.Designer.cs">
       <DependentUpon>FormCuentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEstadoYMovimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEstadoYMovimientos.Designer.cs">
+      <DependentUpon>FormEstadoYMovimientos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMenu.cs">
       <SubType>Form</SubType>
     </Compile>

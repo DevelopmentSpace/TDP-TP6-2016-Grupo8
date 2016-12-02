@@ -33,7 +33,7 @@ namespace EJ2
             int.TryParse(txtIdCliente.Text, out clientId);
 
             double limite;
-            double.TryParse(txtId.Text, out limite);
+            double.TryParse(txtLimite.Text, out limite);
 
             AccountDTO account = new AccountDTO()
             {
