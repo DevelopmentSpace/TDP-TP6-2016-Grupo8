@@ -256,6 +256,24 @@ namespace EJ2
 
         //ADMINISTRACION DE MOVIMIENTOS//
 
+        public void AgregarMovimiento(int pCuentaId,int pMonto,string pDescripcion)
+        {
+            UnitOfWork transaccion = this.CrearTransaccion();
+            Account cuenta = transaccion.AccountRepository.Get(pCuentaId);
+
+            AccountMovement movimiento = new AccountMovement();
+            movimiento.Amount = pMonto;
+            movimiento.Date = DateTime.Today;
+            movimiento.Description = pDescripcion;
+
+            cuenta.Movements.Add(movimiento);
+
+            transaccion.Complete();
+
+            transaccion.Dispose();
+
+        }
+
 
         public IEnumerable<AccountMovementDTO> ObtenerNMovimientos(int cuentaId,int nMovimientos)
         {
