@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EJ2.DTO;
 
 namespace EJ2
 {
@@ -23,7 +24,25 @@ namespace EJ2
             iIdCuenta = pIdCuenta;
         }
 
+        private void btnObtUltMov_Click(object sender, EventArgs e)
+        {
+            int cant;
+            int.TryParse(txtCantMov.Text, out cant);
 
+            IEnumerable<AccountMovementDTO> enuCli = iAM.ObtenerNMovimientos(iIdCuenta, cant);
 
+            tablaMovimientos.DataSource = enuCli;
+            tablaMovimientos.Refresh();
+        }
+
+        private void FormEstadoYMovimientos_Load(object sender, EventArgs e)
+        {
+            this
+        }
+
+        private void ActualizarBalance()
+        {
+           txtBalance.Text=iAM.ObtenerBalance(iIdCuenta).ToString();
+        }
     }
 }

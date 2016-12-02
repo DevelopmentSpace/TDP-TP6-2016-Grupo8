@@ -39,12 +39,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnAcreditar = new System.Windows.Forms.Button();
             this.btnDebitar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCantMov = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnObtUltMov = new System.Windows.Forms.Button();
+            this.tablaMovimientos = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaMovimientos)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -73,8 +75,9 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.tablaMovimientos);
+            this.groupBox3.Controls.Add(this.btnObtUltMov);
+            this.groupBox3.Controls.Add(this.txtCantMov);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Location = new System.Drawing.Point(12, 135);
             this.groupBox3.Name = "groupBox3";
@@ -94,6 +97,7 @@
             // 
             // txtIdCuenta
             // 
+            this.txtIdCuenta.Enabled = false;
             this.txtIdCuenta.Location = new System.Drawing.Point(38, 10);
             this.txtIdCuenta.Name = "txtIdCuenta";
             this.txtIdCuenta.Size = new System.Drawing.Size(100, 20);
@@ -101,6 +105,7 @@
             // 
             // txtBalance
             // 
+            this.txtBalance.Enabled = false;
             this.txtBalance.Location = new System.Drawing.Point(73, 26);
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.Size = new System.Drawing.Size(100, 20);
@@ -149,12 +154,12 @@
             this.btnDebitar.Text = "Debitar";
             this.btnDebitar.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtCantMov
             // 
-            this.textBox1.Location = new System.Drawing.Point(77, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
+            this.txtCantMov.Location = new System.Drawing.Point(77, 19);
+            this.txtCantMov.Name = "txtCantMov";
+            this.txtCantMov.Size = new System.Drawing.Size(100, 20);
+            this.txtCantMov.TabIndex = 7;
             // 
             // label4
             // 
@@ -165,14 +170,32 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Cantidad:";
             // 
-            // button1
+            // btnObtUltMov
             // 
-            this.button1.Location = new System.Drawing.Point(201, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Debitar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnObtUltMov.Location = new System.Drawing.Point(195, 17);
+            this.btnObtUltMov.Name = "btnObtUltMov";
+            this.btnObtUltMov.Size = new System.Drawing.Size(189, 23);
+            this.btnObtUltMov.TabIndex = 10;
+            this.btnObtUltMov.Text = "Obtener ultimos movimientos";
+            this.btnObtUltMov.UseVisualStyleBackColor = true;
+            this.btnObtUltMov.Click += new System.EventHandler(this.btnObtUltMov_Click);
+            // 
+            // tablaMovimientos
+            // 
+            this.tablaMovimientos.AllowUserToAddRows = false;
+            this.tablaMovimientos.AllowUserToDeleteRows = false;
+            this.tablaMovimientos.AllowUserToResizeColumns = false;
+            this.tablaMovimientos.AllowUserToResizeRows = false;
+            this.tablaMovimientos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tablaMovimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaMovimientos.Location = new System.Drawing.Point(6, 46);
+            this.tablaMovimientos.MultiSelect = false;
+            this.tablaMovimientos.Name = "tablaMovimientos";
+            this.tablaMovimientos.ReadOnly = true;
+            this.tablaMovimientos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tablaMovimientos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tablaMovimientos.Size = new System.Drawing.Size(644, 201);
+            this.tablaMovimientos.TabIndex = 17;
             // 
             // FormEstadoYMovimientos
             // 
@@ -186,12 +209,14 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FormEstadoYMovimientos";
             this.Text = "Estado de cuenta y movimientos";
+            this.Load += new System.EventHandler(this.FormEstadoYMovimientos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaMovimientos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,10 +233,11 @@
         private System.Windows.Forms.TextBox txtMonto;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnObtUltMov;
+        private System.Windows.Forms.TextBox txtCantMov;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtIdCuenta;
+        private System.Windows.Forms.DataGridView tablaMovimientos;
     }
 }
