@@ -83,7 +83,7 @@ namespace EJ2
 
             UnitOfWork transaccion = this.CrearTransaccion();
                 
-            Client client = transaccion.ClientRepository.Get(100);
+            Client client = transaccion.ClientRepository.Get(clientId);
 
             if (client == null)
             {
@@ -169,6 +169,19 @@ namespace EJ2
                 throw new InvalidOperationException("La cuenta no existe");
 
             return cuenta;
+        }
+
+
+        public IEnumerable<AccountDTO> ListaCuentas()
+        {
+            UnitOfWork transaccion = this.CrearTransaccion();
+            IEnumerable<AccountDTO> list;
+
+            list = AutoMapper.Mapper.Map<IEnumerable<AccountDTO>>(transaccion.AccountRepository.GetAll());
+            transaccion.Complete();
+            transaccion.Dispose();
+
+            return list;
         }
 
 

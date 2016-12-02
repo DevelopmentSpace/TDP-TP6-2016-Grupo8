@@ -14,7 +14,9 @@ namespace EJ2.DTO
 
         public double OverdraftLimit { get; set; }
 
-        public virtual int ClientId { get; set; }
+        public int ClientId { get; set; }
+
+        public string ClientName { get; set; }
 
     }
 }

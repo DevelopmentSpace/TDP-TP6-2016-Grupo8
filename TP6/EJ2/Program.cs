@@ -23,7 +23,8 @@ namespace EJ2
                     .ForMember(dest => dest.Document, opt => opt.MapFrom(src => new Document() { Number = src.NumberDocument, Type = stringADocType(src.TypeDocument) }));
 
                 cfg.CreateMap<Account, AccountDTO>()
-                    .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id));
+                    .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id))
+                    .ForMember(dest => dest.ClientName, opt => opt.MapFrom(src => src.Client.LastName + ", "+src.Client.FirstName));
 
                 cfg.CreateMap<AccountDTO, Account>()
                     .ForMember(dest => dest.Client, opt => opt.MapFrom(src => new Client()

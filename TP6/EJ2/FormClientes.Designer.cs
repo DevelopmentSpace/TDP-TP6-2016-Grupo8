@@ -40,13 +40,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtNumeroDoc = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnObtTodos = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +65,7 @@
             this.tablaClientes.ReadOnly = true;
             this.tablaClientes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tablaClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tablaClientes.Size = new System.Drawing.Size(629, 154);
+            this.tablaClientes.Size = new System.Drawing.Size(613, 154);
             this.tablaClientes.TabIndex = 0;
             this.tablaClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellClick);
             // 
@@ -172,6 +172,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(513, 37);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 16;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(513, 66);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 14;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(525, 21);
@@ -208,16 +228,6 @@
             this.txtBuscar.Size = new System.Drawing.Size(163, 20);
             this.txtBuscar.TabIndex = 11;
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Location = new System.Drawing.Point(513, 66);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 14;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
             // btnObtTodos
             // 
             this.btnObtTodos.Location = new System.Drawing.Point(340, 125);
@@ -228,21 +238,11 @@
             this.btnObtTodos.UseVisualStyleBackColor = true;
             this.btnObtTodos.Click += new System.EventHandler(this.btnObtTodos_Click);
             // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(513, 37);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 16;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
             // FormClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 417);
+            this.ClientSize = new System.Drawing.Size(638, 341);
             this.Controls.Add(this.btnObtTodos);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnBuscar);
