@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EJ2.DTO;
 
 namespace EJ2
 {
-    class AccountManager
+    public class AccountManager
     {
 
         private UnitOfWork CrearTransaccion()
@@ -26,7 +27,29 @@ namespace EJ2
 
 
 
+        public void AgregarCliente(ClientDTO clientDTO)
+        {
+            Client cliente = AutoMapper.Mapper.Map<Client>(clientDTO);
 
+            UnitOfWork transaccion = this.CrearTransaccion();
+            try
+            {
+                transaccion.ClientRepository.Add(cliente);
+                transaccion.Complete();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Se produjo un error en la base de datos.");
+            }
+            finally
+            {
+                transaccion.Dispose();
+            }
+
+        }
+
+
+        /*
         public void AgregarCliente(string pNombre, string pApellido, string pNroDocumento, String pTipoDocumento)
         {
 
@@ -77,7 +100,7 @@ namespace EJ2
             }
             catch (Exception)
             {
-                throw new ApplicationException("Se produjo un error al persistir los cambios");
+                throw new ApplicationException("Se produjo un error en la base de datos.");
             }
             finally
             {
@@ -85,7 +108,7 @@ namespace EJ2
             }
 
         }
-
+        */
 
 
 
@@ -102,9 +125,63 @@ namespace EJ2
             }
             catch (Exception)
             {
-                throw new ApplicationException("Se produjo un error al persistir los cambios");
+                throw new ApplicationException("Se produjo un error en la base de datos.");
+            }
+            finally
+            {
+                transaccion.Dispose();
             }
 
+        }
+
+
+        public ClientDTO ObtenerCliente(int clientId)
+        {
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+            Client client;
+            try
+            {
+
+                client = transaccion.ClientRepository.Get(clientId);
+                transaccion.Complete();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Se produjo un error en la base de datos.");
+            }
+            finally
+            {
+                transaccion.Dispose();
+            }
+
+            AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Client, ClientDTO>());
+            return AutoMapper.Mapper.Instance.Map<ClientDTO>(client);
+
+        }
+
+
+        public IEnumerable<ClientDTO> ListaClientes()
+        {
+            UnitOfWork transaccion = this.CrearTransaccion();
+            IEnumerable<Client> list;
+
+            try
+            {
+                list = transaccion.ClientRepository.GetAll();
+                transaccion.Complete();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Se produjo un error en la base de datos.");
+            }
+            finally
+            {
+                transaccion.Dispose();
+            }
+
+
+            return AutoMapper.Mapper.Map<IEnumerable<ClientDTO>>(list);
         }
 
     }
