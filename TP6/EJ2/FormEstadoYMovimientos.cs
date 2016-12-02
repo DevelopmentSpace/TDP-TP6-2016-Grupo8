@@ -37,12 +37,31 @@ namespace EJ2
 
         private void FormEstadoYMovimientos_Load(object sender, EventArgs e)
         {
-            this
+            this.ActualizarBalance();
+            txtIdCuenta.Text = iIdCuenta.ToString();
         }
 
         private void ActualizarBalance()
         {
            txtBalance.Text=iAM.ObtenerBalance(iIdCuenta).ToString();
+        }
+
+        private void btnAcreditar_Click(object sender, EventArgs e)
+        {
+            int monto;
+            int.TryParse(txtMonto.Text, out monto);
+
+            iAM.AgregarMovimiento(iIdCuenta, monto, txtDesc.Text);
+            this.ActualizarBalance();
+        }
+
+        private void btnDebitar_Click(object sender, EventArgs e)
+        {
+            int monto;
+            int.TryParse(txtMonto.Text, out monto);
+
+            iAM.AgregarMovimiento(iIdCuenta, -monto, txtDesc.Text);
+            this.ActualizarBalance();
         }
     }
 }

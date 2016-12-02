@@ -43,6 +43,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnObtUltMov = new System.Windows.Forms.Button();
             this.tablaMovimientos = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtDesc = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -64,11 +66,13 @@
             // 
             this.groupBox2.Controls.Add(this.btnDebitar);
             this.groupBox2.Controls.Add(this.btnAcreditar);
+            this.groupBox2.Controls.Add(this.txtDesc);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtMonto);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(304, 13);
+            this.groupBox2.Location = new System.Drawing.Point(273, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(364, 101);
+            this.groupBox2.Size = new System.Drawing.Size(395, 101);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Operaciones";
@@ -122,7 +126,7 @@
             // 
             // txtMonto
             // 
-            this.txtMonto.Location = new System.Drawing.Point(68, 42);
+            this.txtMonto.Location = new System.Drawing.Point(86, 21);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(100, 20);
             this.txtMonto.TabIndex = 7;
@@ -130,7 +134,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 45);
+            this.label3.Location = new System.Drawing.Point(14, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 6;
@@ -138,21 +142,23 @@
             // 
             // btnAcreditar
             // 
-            this.btnAcreditar.Location = new System.Drawing.Point(196, 19);
+            this.btnAcreditar.Location = new System.Drawing.Point(213, 20);
             this.btnAcreditar.Name = "btnAcreditar";
             this.btnAcreditar.Size = new System.Drawing.Size(146, 23);
             this.btnAcreditar.TabIndex = 8;
             this.btnAcreditar.Text = "Acreditar";
             this.btnAcreditar.UseVisualStyleBackColor = true;
+            this.btnAcreditar.Click += new System.EventHandler(this.btnAcreditar_Click);
             // 
             // btnDebitar
             // 
-            this.btnDebitar.Location = new System.Drawing.Point(196, 62);
+            this.btnDebitar.Location = new System.Drawing.Point(213, 62);
             this.btnDebitar.Name = "btnDebitar";
             this.btnDebitar.Size = new System.Drawing.Size(146, 23);
             this.btnDebitar.TabIndex = 9;
             this.btnDebitar.Text = "Debitar";
             this.btnDebitar.UseVisualStyleBackColor = true;
+            this.btnDebitar.Click += new System.EventHandler(this.btnDebitar_Click);
             // 
             // txtCantMov
             // 
@@ -197,6 +203,22 @@
             this.tablaMovimientos.Size = new System.Drawing.Size(644, 201);
             this.tablaMovimientos.TabIndex = 17;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 65);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Descripcion:";
+            // 
+            // txtDesc
+            // 
+            this.txtDesc.Location = new System.Drawing.Point(86, 62);
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.Size = new System.Drawing.Size(100, 20);
+            this.txtDesc.TabIndex = 7;
+            // 
             // FormEstadoYMovimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,5 +261,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtIdCuenta;
         private System.Windows.Forms.DataGridView tablaMovimientos;
+        private System.Windows.Forms.TextBox txtDesc;
+        private System.Windows.Forms.Label label5;
     }
 }
