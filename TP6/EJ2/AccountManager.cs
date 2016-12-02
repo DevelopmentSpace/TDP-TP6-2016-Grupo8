@@ -184,6 +184,44 @@ namespace EJ2
             return list;
         }
 
+        public double ObtenerBalance(int cuentaId)
+        {
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+            double balance = transaccion.AccountRepository.GetAccountBalance(AutoMapper.Mapper.Map<Account>(transaccion.AccountRepository.Get(cuentaId)));
+
+            transaccion.Complete();
+
+            transaccion.Dispose();
+
+            return balance;
+        }
+
+        public IEnumerable<AccountMovement> ObtenerNMovimientos(int cuentaId,int nMovimientos)
+        {
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+            IEnumerable<AccountMovement> listaNMovimientos = transaccion.AccountRepository.GetLastMovements(AutoMapper.Mapper.Map<Account>(transaccion.AccountRepository.Get(cuentaId)),nMovimientos);
+
+            transaccion.Complete();
+
+            transaccion.Dispose();
+
+            return listaNMovimientos;
+        }
+
+        public IEnumerable<Account> ObtenerNMovimientos(int cuentaId)
+        {
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+            IEnumerable<Account> listaCuentasDeudoras = transaccion.AccountRepository.GetOverdrawnAccounts();
+
+            transaccion.Complete();
+
+            transaccion.Dispose();
+
+            return listaCuentasDeudoras;
+        }
 
     }
 }
