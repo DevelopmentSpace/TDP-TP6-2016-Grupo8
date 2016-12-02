@@ -61,7 +61,7 @@ namespace EJ2
         private void btnEliminar_Click(object sender, EventArgs e)
         {
  
-            DialogResult res = MessageBox.Show("Esta seguro que desea eliminar e cliente con ID: "+txtId.Text+" ?","Confimarcion",MessageBoxButtons.YesNo);
+            DialogResult res = MessageBox.Show("Esta seguro que desea eliminar el cliente con ID: "+txtId.Text+" ?","Confimarcion",MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
                 int id;
@@ -104,7 +104,7 @@ namespace EJ2
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Esta seguro que desea actualizar los datos:", "Confimarcion", MessageBoxButtons.YesNo);
+            DialogResult res = MessageBox.Show("Esta seguro que desea actualizar los datos?", "Confimarcion", MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
                 int id;

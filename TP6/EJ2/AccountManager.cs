@@ -140,6 +140,7 @@ namespace EJ2
             UnitOfWork transaccion = this.CrearTransaccion();
             try
             {
+                cuenta.Client = transaccion.ClientRepository.Get(cuenta.Client.Id);
                 transaccion.AccountRepository.Add(cuenta);
                 transaccion.Complete();
             }
@@ -152,6 +153,49 @@ namespace EJ2
                 transaccion.Dispose();
             }
 
+        }
+
+        public void ModificarCuenta(AccountDTO pCuentaDTO)
+        {
+
+            Account cuentaAct = AutoMapper.Mapper.Map<Account>(pCuentaDTO);
+
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+
+            Account cuenta = transaccion.AccountRepository.Get(cuentaAct.Id);
+
+            if (cuenta == null)
+            {
+                transaccion.Dispose();
+                throw new InvalidOperationException("La cuenta no existe");
+            }
+
+            cuenta.Client = transaccion.ClientRepository.Get(cuentaAct.Client.Id);
+            cuenta.Name = cuentaAct.Name;
+            cuenta.OverdraftLimit = cuentaAct.OverdraftLimit;
+
+            transaccion.Complete();
+            transaccion.Dispose();
+
+        }
+
+        public void EliminarCuenta(int cuentaId)
+        {
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+
+            Account cuenta = transaccion.AccountRepository.Get(cuentaId);
+
+            if (cuenta == null)
+            {
+                transaccion.Dispose();
+                throw new InvalidOperationException("La cuenta no existe");
+            }
+
+            transaccion.AccountRepository.Remove(cuenta);
+            transaccion.Complete();
+            transaccion.Dispose();
         }
 
         public AccountDTO ObtenerCuenta(int cuentaId)
@@ -186,7 +230,6 @@ namespace EJ2
 
         public double ObtenerBalance(int cuentaId)
         {
-
             UnitOfWork transaccion = this.CrearTransaccion();
             double balance = transaccion.AccountRepository.GetAccountBalance(AutoMapper.Mapper.Map<Account>(transaccion.AccountRepository.Get(cuentaId)));
 
@@ -197,30 +240,35 @@ namespace EJ2
             return balance;
         }
 
-        public IEnumerable<AccountMovement> ObtenerNMovimientos(int cuentaId,int nMovimientos)
+        public IEnumerable<AccountDTO> ObtenerCuentasSuperanDescubierto()
         {
 
             UnitOfWork transaccion = this.CrearTransaccion();
-            IEnumerable<AccountMovement> listaNMovimientos = transaccion.AccountRepository.GetLastMovements(AutoMapper.Mapper.Map<Account>(transaccion.AccountRepository.Get(cuentaId)),nMovimientos);
-
-            transaccion.Complete();
-
-            transaccion.Dispose();
-
-            return listaNMovimientos;
-        }
-
-        public IEnumerable<Account> ObtenerNMovimientos(int cuentaId)
-        {
-
-            UnitOfWork transaccion = this.CrearTransaccion();
-            IEnumerable<Account> listaCuentasDeudoras = transaccion.AccountRepository.GetOverdrawnAccounts();
+            IEnumerable<AccountDTO> listaCuentasDeudoras = AutoMapper.Mapper.Map<IEnumerable<AccountDTO>>(transaccion.AccountRepository.GetOverdrawnAccounts());
 
             transaccion.Complete();
 
             transaccion.Dispose();
 
             return listaCuentasDeudoras;
+        }
+
+
+        //ADMINISTRACION DE MOVIMIENTOS//
+
+
+        public IEnumerable<AccountMovementDTO> ObtenerNMovimientos(int cuentaId,int nMovimientos)
+        {
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+            Account cuenta = transaccion.AccountRepository.Get(cuentaId);
+            IEnumerable<AccountMovementDTO> listaNMovimientos = AutoMapper.Mapper.Map< IEnumerable < AccountMovementDTO >>( transaccion.AccountRepository.GetLastMovements(cuenta,nMovimientos));
+
+            transaccion.Complete();
+
+            transaccion.Dispose();
+
+            return listaNMovimientos;
         }
 
     }

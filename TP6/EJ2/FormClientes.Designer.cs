@@ -47,8 +47,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnObtTodos = new System.Windows.Forms.Button();
+            this.lista = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.lista.SuspendLayout();
             this.SuspendLayout();
             // 
             // tablaClientes
@@ -59,13 +61,13 @@
             this.tablaClientes.AllowUserToResizeRows = false;
             this.tablaClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tablaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaClientes.Location = new System.Drawing.Point(12, 169);
+            this.tablaClientes.Location = new System.Drawing.Point(6, 43);
             this.tablaClientes.MultiSelect = false;
             this.tablaClientes.Name = "tablaClientes";
             this.tablaClientes.ReadOnly = true;
             this.tablaClientes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tablaClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tablaClientes.Size = new System.Drawing.Size(613, 154);
+            this.tablaClientes.Size = new System.Drawing.Size(868, 242);
             this.tablaClientes.TabIndex = 0;
             this.tablaClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellClick);
             // 
@@ -157,6 +159,7 @@
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.btnEliminar);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btnAgregar);
             this.groupBox1.Controls.Add(this.txtId);
             this.groupBox1.Controls.Add(this.txtNumeroDoc);
             this.groupBox1.Controls.Add(this.label1);
@@ -167,14 +170,14 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(613, 101);
+            this.groupBox1.Size = new System.Drawing.Size(888, 101);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(513, 37);
+            this.btnModificar.Location = new System.Drawing.Point(647, 43);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 16;
@@ -184,7 +187,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(513, 66);
+            this.btnEliminar.Location = new System.Drawing.Point(764, 43);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 14;
@@ -194,7 +197,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(525, 21);
+            this.btnAgregar.Location = new System.Drawing.Point(528, 43);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 12;
@@ -204,7 +207,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(247, 125);
+            this.btnBuscar.Location = new System.Drawing.Point(247, 123);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 13;
@@ -215,7 +218,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(45, 133);
+            this.label6.Location = new System.Drawing.Point(45, 131);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(19, 13);
             this.label6.TabIndex = 12;
@@ -223,14 +226,14 @@
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(70, 127);
+            this.txtBuscar.Location = new System.Drawing.Point(70, 125);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(163, 20);
             this.txtBuscar.TabIndex = 11;
             // 
             // btnObtTodos
             // 
-            this.btnObtTodos.Location = new System.Drawing.Point(340, 125);
+            this.btnObtTodos.Location = new System.Drawing.Point(50, 14);
             this.btnObtTodos.Name = "btnObtTodos";
             this.btnObtTodos.Size = new System.Drawing.Size(75, 23);
             this.btnObtTodos.TabIndex = 15;
@@ -238,23 +241,33 @@
             this.btnObtTodos.UseVisualStyleBackColor = true;
             this.btnObtTodos.Click += new System.EventHandler(this.btnObtTodos_Click);
             // 
+            // lista
+            // 
+            this.lista.Controls.Add(this.tablaClientes);
+            this.lista.Controls.Add(this.btnObtTodos);
+            this.lista.Location = new System.Drawing.Point(20, 154);
+            this.lista.Name = "lista";
+            this.lista.Size = new System.Drawing.Size(880, 293);
+            this.lista.TabIndex = 16;
+            this.lista.TabStop = false;
+            this.lista.Text = "lista";
+            // 
             // FormClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 341);
-            this.Controls.Add(this.btnObtTodos);
+            this.ClientSize = new System.Drawing.Size(912, 459);
+            this.Controls.Add(this.lista);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtBuscar);
-            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.tablaClientes);
             this.Name = "FormClientes";
             this.Text = "Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.lista.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,5 +294,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnObtTodos;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.GroupBox lista;
     }
 }

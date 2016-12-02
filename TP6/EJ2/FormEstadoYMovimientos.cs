@@ -13,12 +13,17 @@ namespace EJ2
     public partial class FormEstadoYMovimientos : Form
     {
         AccountManager iAM;
+        int iIdCuenta;
 
-        public FormEstadoYMovimientos(AccountManager pAM)
+        public FormEstadoYMovimientos(AccountManager pAM, int pIdCuenta)
         {
             InitializeComponent();
 
             iAM = pAM;
+            iIdCuenta = pIdCuenta;
         }
+
+
+
     }
 }

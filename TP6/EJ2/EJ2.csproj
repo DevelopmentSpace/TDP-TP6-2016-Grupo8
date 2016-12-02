@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="AccountManager.cs" />
     <Compile Include="DTO\AccountDTO.cs" />
+    <Compile Include="DTO\AccountMovementDTO.cs" />
     <Compile Include="FormClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCuentas.resx">
       <DependentUpon>FormCuentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEstadoYMovimientos.resx">
+      <DependentUpon>FormEstadoYMovimientos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>

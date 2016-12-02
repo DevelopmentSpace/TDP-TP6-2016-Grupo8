@@ -27,14 +27,9 @@ namespace EJ2
             new FormClientes(iAM).ShowDialog();
         }
 
-        private void gestionarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new FormCuentas(iAM).ShowDialog();
-        }
-
-        private void movimientosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new FormEstadoYMovimientos(iAM).ShowDialog();
         }
     }
 }
