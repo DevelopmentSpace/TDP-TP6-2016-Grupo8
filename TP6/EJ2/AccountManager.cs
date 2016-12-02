@@ -263,7 +263,7 @@ namespace EJ2
 
             AccountMovement movimiento = new AccountMovement();
             movimiento.Amount = pMonto;
-            movimiento.Date = DateTime.Today;
+            movimiento.Date = DateTime.Now;
             movimiento.Description = pDescripcion;
 
             cuenta.Movements.Add(movimiento);
