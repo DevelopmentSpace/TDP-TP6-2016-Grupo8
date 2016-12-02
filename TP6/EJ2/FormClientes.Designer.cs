@@ -46,6 +46,7 @@
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnObtTodos = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tablaClientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -152,7 +153,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnModificar);
             this.groupBox1.Controls.Add(this.txtNombre);
+            this.groupBox1.Controls.Add(this.btnEliminar);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtId);
             this.groupBox1.Controls.Add(this.txtNumeroDoc);
@@ -164,7 +167,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(466, 101);
+            this.groupBox1.Size = new System.Drawing.Size(613, 101);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
@@ -181,32 +184,33 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(261, 128);
+            this.btnBuscar.Location = new System.Drawing.Point(247, 125);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 13;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(28, 134);
+            this.label6.Location = new System.Drawing.Point(45, 133);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.Size = new System.Drawing.Size(19, 13);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Num. Doc:";
+            this.label6.Text = "Id:";
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(92, 131);
+            this.txtBuscar.Location = new System.Drawing.Point(70, 127);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(163, 20);
             this.txtBuscar.TabIndex = 11;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(525, 58);
+            this.btnEliminar.Location = new System.Drawing.Point(513, 66);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 14;
@@ -216,7 +220,7 @@
             // 
             // btnObtTodos
             // 
-            this.btnObtTodos.Location = new System.Drawing.Point(396, 128);
+            this.btnObtTodos.Location = new System.Drawing.Point(340, 125);
             this.btnObtTodos.Name = "btnObtTodos";
             this.btnObtTodos.Size = new System.Drawing.Size(75, 23);
             this.btnObtTodos.TabIndex = 15;
@@ -224,13 +228,22 @@
             this.btnObtTodos.UseVisualStyleBackColor = true;
             this.btnObtTodos.Click += new System.EventHandler(this.btnObtTodos_Click);
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(513, 37);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 16;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // FormClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 417);
             this.Controls.Add(this.btnObtTodos);
-            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtBuscar);
@@ -267,5 +280,6 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnObtTodos;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

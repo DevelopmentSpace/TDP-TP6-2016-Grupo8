@@ -39,11 +39,14 @@ namespace EJ2
                 FirstName = txtNombre.Text,
                 LastName = txtApellido.Text,
                 NumberDocument = txtNumeroDoc.Text,
-                TypeDocument = cbTipoDoc.SelectedIndex
+                TypeDocument = cbTipoDoc.SelectedItem.ToString()
             };
 
             iAM.AgregarCliente(client);
+
+            MessageBox.Show("Cliente agregado");
         }
+
 
         private void btnObtTodos_Click(object sender, EventArgs e)
         {
@@ -57,12 +60,15 @@ namespace EJ2
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int id = (int)this.tablaClientes.SelectedRows[0].Cells[0].Value;
-            DialogResult res = MessageBox.Show("Esta seguro que desea eliminar e cliente con ID: "+id.ToString()+" ?","Confimarcion",MessageBoxButtons.YesNo);
+ 
+            DialogResult res = MessageBox.Show("Esta seguro que desea eliminar e cliente con ID: "+txtId.Text+" ?","Confimarcion",MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
+                int id;
+                int.TryParse(txtId.Text, out id);
                 iAM.EliminarCliente(id);
-                this.btnObtTodos.PerformClick() ;
+
+                MessageBox.Show("Cliente eliminado");
             }
                 
         }
@@ -74,9 +80,49 @@ namespace EJ2
 
             DataGridViewRow row = tablaClientes.Rows[e.RowIndex];
 
-            //txtId = row.
+            txtId.Text = row.Cells[0].Value.ToString();
+            txtNombre.Text = row.Cells[3].Value.ToString();
+            txtApellido.Text = row.Cells[4].Value.ToString();
+            txtNumeroDoc.Text = row.Cells[2].Value.ToString();
+            cbTipoDoc.SelectedItem = row.Cells[1].Value.ToString();
+    }
 
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            int id;
+            int.TryParse(txtBuscar.Text, out id);
 
+            ClientDTO cliente = iAM.ObtenerCliente(id);
+
+            txtId.Text = cliente.Id.ToString();
+            txtNombre.Text = cliente.FirstName;
+            txtApellido.Text = cliente.LastName;
+            txtNumeroDoc.Text = cliente.NumberDocument;
+            cbTipoDoc.SelectedItem = cliente.TypeDocument;
+
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Esta seguro que desea actualizar los datos:", "Confimarcion", MessageBoxButtons.YesNo);
+            if (res == DialogResult.Yes)
+            {
+                int id;
+                int.TryParse(txtId.Text, out id);
+
+                ClientDTO client = new ClientDTO()
+                {
+                    Id = id,
+                    FirstName = txtNombre.Text,
+                    LastName = txtApellido.Text,
+                    NumberDocument = txtNumeroDoc.Text,
+                    TypeDocument = (string)cbTipoDoc.SelectedItem
+                };
+
+                iAM.ModificarCliente(client);
+
+                MessageBox.Show("Cliente actualizado");
+            }
         }
     }
 }

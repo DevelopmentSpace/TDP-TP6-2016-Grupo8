@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AccountManager.cs" />
+    <Compile Include="DTO\AccountDTO.cs" />
     <Compile Include="FormClientes.cs">
       <SubType>Form</SubType>
     </Compile>

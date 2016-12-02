@@ -27,9 +27,11 @@ namespace EJ2
 
 
 
-        public void AgregarCliente(ClientDTO clientDTO)
+        //ADMINISTRACION DE CLIENTES//
+
+        public void AgregarCliente(ClientDTO pClientDTO)
         {
-            Client cliente = AutoMapper.Mapper.Map<Client>(clientDTO);
+            Client cliente = AutoMapper.Mapper.Map<Client>(pClientDTO);
 
             UnitOfWork transaccion = this.CrearTransaccion();
             try
@@ -39,7 +41,7 @@ namespace EJ2
             }
             catch (Exception)
             {
-                throw new ApplicationException("Se produjo un error en la base de datos.");
+                throw new InvalidOperationException("El Cliente ya existe");
             }
             finally
             {
@@ -49,66 +51,30 @@ namespace EJ2
         }
 
 
-        /*
-        public void AgregarCliente(string pNombre, string pApellido, string pNroDocumento, String pTipoDocumento)
+        public void ModificarCliente(ClientDTO pClientDTO)
         {
 
-            DocumentType tipoDocumento;
+            Client clientAct = AutoMapper.Mapper.Map<Client>(pClientDTO);
 
-            switch (pTipoDocumento)
-            {
-                case "DNI":
-                    {
-                        tipoDocumento = DocumentType.DNI;
-                        break;
-                    }
-                case "CUIL":
-                    {
-                        tipoDocumento = DocumentType.CUIL;
-                        break;
-                    }
-                case "LC":
-                    {
-                        tipoDocumento = DocumentType.LC;
-                        break;
-                    }
-                case "LE":
-                    {
-                        tipoDocumento = DocumentType.LE;
-                        break;
-                    }
-                default:
-                    throw new ArgumentException("No valido", nameof(pTipoDocumento));
-            }
-
-            Client cliente = new Client()
-            {
-                FirstName = pNombre,
-                LastName = pApellido,
-                Document = new Document()
-                {
-                    Number = pNroDocumento,
-                    Type = tipoDocumento,
-                }
-            };
 
             UnitOfWork transaccion = this.CrearTransaccion();
-            try
-            {
-                transaccion.ClientRepository.Add(cliente);
-                transaccion.Complete();   
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Se produjo un error en la base de datos.");
-            }
-            finally
+
+            Client client = transaccion.ClientRepository.Get(clientAct.Id);
+
+            if (client == null)
             {
                 transaccion.Dispose();
+                throw new InvalidOperationException("El cliente no existe");
             }
 
+            client.Document = clientAct.Document;
+            client.FirstName = clientAct.FirstName;
+            client.LastName = clientAct.LastName;
+
+            transaccion.Complete();
+            transaccion.Dispose();
+
         }
-        */
 
 
 
@@ -116,22 +82,18 @@ namespace EJ2
         {
 
             UnitOfWork transaccion = this.CrearTransaccion();
-            try
-            {
                 
-                Client client = transaccion.ClientRepository.Get(clientId);
-                transaccion.ClientRepository.Remove(client);
-                transaccion.Complete();
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Se produjo un error en la base de datos.");
-            }
-            finally
+            Client client = transaccion.ClientRepository.Get(100);
+
+            if (client == null)
             {
                 transaccion.Dispose();
+                throw new InvalidOperationException("El cliente no existe");
             }
 
+            transaccion.ClientRepository.Remove(client);
+            transaccion.Complete();
+            transaccion.Dispose();
         }
 
 
@@ -139,50 +101,76 @@ namespace EJ2
         {
 
             UnitOfWork transaccion = this.CrearTransaccion();
-            Client client;
-            try
-            {
+            ClientDTO client;
 
-                client = transaccion.ClientRepository.Get(clientId);
+            client = AutoMapper.Mapper.Instance.Map<ClientDTO>(transaccion.ClientRepository.Get(clientId));
                 transaccion.Complete();
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Se produjo un error en la base de datos.");
-            }
-            finally
-            {
-                transaccion.Dispose();
-            }
 
-            AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Client, ClientDTO>());
-            return AutoMapper.Mapper.Instance.Map<ClientDTO>(client);
+            transaccion.Dispose();
 
+            if(client==null)
+                throw new InvalidOperationException("El cliente no existe");
+
+            return client;
         }
 
 
         public IEnumerable<ClientDTO> ListaClientes()
         {
             UnitOfWork transaccion = this.CrearTransaccion();
-            IEnumerable<Client> list;
+            IEnumerable<ClientDTO> list;
 
+            list = AutoMapper.Mapper.Map<IEnumerable<ClientDTO>>(transaccion.ClientRepository.GetAll());
+            transaccion.Complete();
+            transaccion.Dispose();
+
+            return list;
+        }
+
+
+
+
+
+        //ADMINISTRACION DE CUENTAS//
+
+        public void AgregarCuenta(AccountDTO pAccountDTO)
+        {
+            Account cuenta = AutoMapper.Mapper.Map<Account>(pAccountDTO);
+
+            UnitOfWork transaccion = this.CrearTransaccion();
             try
             {
-                list = transaccion.ClientRepository.GetAll();
+                transaccion.AccountRepository.Add(cuenta);
                 transaccion.Complete();
             }
             catch (Exception)
             {
-                throw new ApplicationException("Se produjo un error en la base de datos.");
+                throw new InvalidOperationException("La cuenta ya existe");
             }
             finally
             {
                 transaccion.Dispose();
             }
 
-
-            return AutoMapper.Mapper.Map<IEnumerable<ClientDTO>>(list);
         }
+
+        public AccountDTO ObtenerCuenta(int cuentaId)
+        {
+
+            UnitOfWork transaccion = this.CrearTransaccion();
+            AccountDTO cuenta;
+
+            cuenta = AutoMapper.Mapper.Instance.Map<AccountDTO>(transaccion.AccountRepository.Get(cuentaId));
+            transaccion.Complete();
+
+            transaccion.Dispose();
+
+            if (cuenta == null)
+                throw new InvalidOperationException("La cuenta no existe");
+
+            return cuenta;
+        }
+
 
     }
 }

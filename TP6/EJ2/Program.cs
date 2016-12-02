@@ -17,10 +17,19 @@ namespace EJ2
             {
                 cfg.CreateMap<Client, ClientDTO>()
                     .ForMember(dest => dest.NumberDocument, opt => opt.MapFrom(src => src.Document.Number))
-                    .ForMember(dest => dest.TypeDocument, opt => opt.MapFrom(src => src.Document.Type));
+                    .ForMember(dest => dest.TypeDocument, opt => opt.MapFrom(src => DocTypeAString(src.Document.Type)));
 
                 cfg.CreateMap<ClientDTO, Client>()
-                    .ForMember(dest => dest.Document, opt => opt.MapFrom(src => new Document() { Number = src.NumberDocument, Type = (DocumentType)src.TypeDocument }));
+                    .ForMember(dest => dest.Document, opt => opt.MapFrom(src => new Document() { Number = src.NumberDocument, Type = stringADocType(src.TypeDocument) }));
+
+                cfg.CreateMap<Account, AccountDTO>()
+                    .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id));
+
+                cfg.CreateMap<AccountDTO, Account>()
+                    .ForMember(dest => dest.Client, opt => opt.MapFrom(src => new Client()
+                    {
+                        Id = src.ClientId
+                    }));
             }
             );
 
@@ -28,5 +37,54 @@ namespace EJ2
             
             Application.Run(new FormMenu());
         }
+
+        private static DocumentType stringADocType(string pTipoDocumento)
+        {
+            switch (pTipoDocumento)
+            {
+                case "DNI":
+                    return DocumentType.DNI;
+
+                case "CUIL":
+                    return DocumentType.CUIL;
+
+                case "LC":
+                    return DocumentType.LC;
+
+                case "LE":
+                    return DocumentType.LE;
+                default:
+                    throw new ArgumentException("Tipo de documento no Valido");
+            }
+        }
+
+        private static string DocTypeAString(DocumentType pTipoDocumento)
+        {
+            switch (pTipoDocumento)
+            {
+                case DocumentType.DNI:
+                    return "DNI";
+
+                case DocumentType.CUIL:
+                    return "CUIL";
+
+                case DocumentType.LC:
+                    return "LC";
+
+                case DocumentType.LE:
+                    return "LE";
+                default:
+                    throw new ArgumentException("Tipo de documento no Valido");
+            }
+        }
+
+
+
+
+
+
+
     }
+
+        
 }

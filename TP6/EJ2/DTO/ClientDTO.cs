@@ -11,12 +11,12 @@ namespace EJ2.DTO
     {
             public int Id { get; set; }
 
-            public int TypeDocument { get; set; }
+            public string TypeDocument { get; set; }
 
-            public String NumberDocument { get; set; }
+            public string NumberDocument { get; set; }
 
-            public String FirstName { get; set; }
+            public string FirstName { get; set; }
 
-            public String LastName { get; set; }
+            public string LastName { get; set; }
     }
 }
