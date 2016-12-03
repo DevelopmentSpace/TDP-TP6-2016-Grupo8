@@ -12,6 +12,7 @@ namespace EJ1_
         {
             using (var db = new AgendaContext())
             {
+                //Se crea y modifica una persona, con su respectivo numero de telefono.
                 Persona mPersona = new Persona
                 {
                     PersonaId = 1,
@@ -28,9 +29,13 @@ namespace EJ1_
                     }
                 };
 
+                //Se agrega dicha persona a la base de datos.
                 db.Personas.Add(mPersona);
+
+                //Se guardan los cambios en la base de datos.
                 db.SaveChanges();
 
+                //Se muestran las personas encontradas.
                 foreach (var per in db.Personas)
                 {
                   Console.WriteLine("Persona encontrada - Nombre: {0}, Apellido: {1}, IdPersona: {2}", per.Nombre, per.Apellido, per.PersonaId);
