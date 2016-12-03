@@ -160,9 +160,6 @@ namespace EJ2
                 {
                     MessageBox.Show("Los datos ingresados son incorrectos.");
                 }
-
-
-
             }
         }
 

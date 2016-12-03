@@ -32,6 +32,20 @@ namespace EJ2
 
 
         }
+        //Actualiza la informacion mostrada en pantalla con el cliente seleccionado.
+        private void tablaClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            DataGridViewRow row = tablaClientes.Rows[e.RowIndex];
+
+            txtId.Text = row.Cells[0].Value.ToString();
+            txtNombre.Text = row.Cells[3].Value.ToString();
+            txtApellido.Text = row.Cells[4].Value.ToString();
+            txtNumeroDoc.Text = row.Cells[2].Value.ToString();
+            cbTipoDoc.SelectedItem = row.Cells[1].Value.ToString();
+        }
 
         // - Botones de la pantalla - //
 
@@ -43,7 +57,7 @@ namespace EJ2
                 MessageBox.Show("Seleccione un tipo de documento");
                 return;
             }
-            //Crea el cliente
+            //Crea el cliente en forma DTO
             ClientDTO client = new ClientDTO()
             {
                 FirstName = txtNombre.Text,
@@ -106,26 +120,15 @@ namespace EJ2
                 
         }
 
-        private void tablaClientes_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-                return;
 
-            DataGridViewRow row = tablaClientes.Rows[e.RowIndex];
-
-            txtId.Text = row.Cells[0].Value.ToString();
-            txtNombre.Text = row.Cells[3].Value.ToString();
-            txtApellido.Text = row.Cells[4].Value.ToString();
-            txtNumeroDoc.Text = row.Cells[2].Value.ToString();
-            cbTipoDoc.SelectedItem = row.Cells[1].Value.ToString();
-    }
 
         //Boton buscar cliente
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             int id;
             int.TryParse(txtBuscar.Text, out id);
-            try {
+            try
+            {
                 ClientDTO cliente = iAM.ObtenerCliente(id);
 
                 txtId.Text = cliente.Id.ToString();
