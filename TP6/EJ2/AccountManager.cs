@@ -90,8 +90,19 @@ namespace EJ2
             client.FirstName = clientAct.FirstName;
             client.LastName = clientAct.LastName;
 
-            transaccion.Complete();
-            transaccion.Dispose();
+            try
+            {
+                transaccion.Complete();
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new ArgumentException("Datos no validos");
+            }
+            finally
+            {
+                transaccion.Dispose();
+            }
+            
 
         }
 
@@ -216,8 +227,19 @@ namespace EJ2
             cuenta.Name = cuentaAct.Name;
             cuenta.OverdraftLimit = cuentaAct.OverdraftLimit;
 
-            transaccion.Complete();
-            transaccion.Dispose();
+            try
+            {
+                transaccion.Complete();
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new ArgumentException("Datos no validos");
+            }
+            finally
+            {
+                transaccion.Dispose();
+            }
+
 
         }
 
@@ -289,7 +311,15 @@ namespace EJ2
         public double ObtenerBalance(int cuentaId)
         {
             UnitOfWork transaccion = this.CrearTransaccion();
-            double balance = transaccion.AccountRepository.GetAccountBalance(AutoMapper.Mapper.Map<Account>(transaccion.AccountRepository.Get(cuentaId)));
+            Account cuenta = transaccion.AccountRepository.Get(cuentaId);
+
+            if (cuenta == null)
+            {
+                transaccion.Dispose();
+                throw new InvalidOperationException("La cuenta no existe");
+            }
+
+            double balance = transaccion.AccountRepository.GetAccountBalance(AutoMapper.Mapper.Map<Account>(cuenta));
 
             transaccion.Complete();
 
@@ -324,10 +354,23 @@ namespace EJ2
         /// <param name="pCuentaId">Id de la cuenta</param>
         /// <param name="pMonto">Monto a transferir</param>
         /// <param name="pDescripcion">Descripcion de la transaccion</param>
-        public void AgregarMovimiento(int pCuentaId,int pMonto,string pDescripcion)
+        public void AgregarMovimiento(int pCuentaId,double pMonto,string pDescripcion)
         {
+            if (pMonto == 0)
+            {
+                throw new ArgumentException("El monto no puede ser 0");
+            }
+
             UnitOfWork transaccion = this.CrearTransaccion();
             Account cuenta = transaccion.AccountRepository.Get(pCuentaId);
+
+
+            if (cuenta == null)
+            {
+                transaccion.Dispose();
+                throw new InvalidOperationException("La cuenta no existe");
+            }
+
 
             AccountMovement movimiento = new AccountMovement();
             movimiento.Amount = pMonto;
@@ -350,9 +393,19 @@ namespace EJ2
         /// <returns>Lista con los n movimientos de la cuenta en formato DTO</returns>
         public IEnumerable<AccountMovementDTO> ObtenerNMovimientos(int cuentaId,int nMovimientos)
         {
-
+            if (nMovimientos <= 0)
+            {
+                throw new ArgumentException("la cantidad debe ser mayor a 0");
+            }
             UnitOfWork transaccion = this.CrearTransaccion();
             Account cuenta = transaccion.AccountRepository.Get(cuentaId);
+
+            if (cuenta == null)
+            {
+                transaccion.Dispose();
+                throw new InvalidOperationException("La cuenta no existe");
+            }
+
             IEnumerable<AccountMovementDTO> listaNMovimientos = AutoMapper.Mapper.Map< IEnumerable < AccountMovementDTO >>( transaccion.AccountRepository.GetLastMovements(cuenta,nMovimientos));
 
             transaccion.Complete();

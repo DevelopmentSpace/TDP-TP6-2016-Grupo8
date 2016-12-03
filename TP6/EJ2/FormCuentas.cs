@@ -26,8 +26,6 @@ namespace EJ2
         private void btnAgregar_Click(object sender, EventArgs e)
         {
 
-            int id;
-            int.TryParse(txtId.Text, out id);
 
             int clientId;
             int.TryParse(txtIdCliente.Text, out clientId);
@@ -37,11 +35,11 @@ namespace EJ2
 
             AccountDTO account = new AccountDTO()
             {
-                Id = id,
                 Name = txtNombre.Text,
                 ClientId = clientId,
                 OverdraftLimit = limite
             };
+
             try
             { 
                 iAM.AgregarCuenta(account);
@@ -55,6 +53,8 @@ namespace EJ2
             {
                 MessageBox.Show("Los datos ingresados son incorrectos.");
             }
+
+            
         }
 
         private void btnBuscarId_Click(object sender, EventArgs e)
@@ -62,23 +62,35 @@ namespace EJ2
             int id;
             int.TryParse(txtBuscarId.Text, out id);
 
-            AccountDTO account = iAM.ObtenerCuenta(id);
 
-            txtId.Text = account.Id.ToString();
-            txtIdCliente.Text = account.ClientId.ToString();
-            txtCliente.Text = account.ClientName;
-            txtNombre.Text = account.Name;
-            txtLimite.Text = account.OverdraftLimit.ToString();
+            try
+            {
+                AccountDTO account = iAM.ObtenerCuenta(id);
+
+                txtId.Text = account.Id.ToString();
+                txtIdCliente.Text = account.ClientId.ToString();
+                txtCliente.Text = account.ClientName;
+                txtNombre.Text = account.Name;
+                txtLimite.Text = account.OverdraftLimit.ToString();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("No exsite una cuenta con el Id ingresado.");
+            }  
             
         }
 
-        private void btnBuscarIdCliente_Click(object sender, EventArgs e)
+
+
+        private void btnVerTodas_Click(object sender, EventArgs e)
         {
             IEnumerable<AccountDTO> enuCli = iAM.ListaCuentas();
 
             tablaCuentas.DataSource = enuCli;
             tablaCuentas.Refresh();
         }
+
+
 
         private void btnObtSuperanLim_Click(object sender, EventArgs e)
         {
@@ -88,16 +100,30 @@ namespace EJ2
             tablaCuentas.Refresh();
         }
 
+
         private void btnDetalleYMov_Click(object sender, EventArgs e)
         {
+            if (txtId.Text == "")
+            {
+                MessageBox.Show("Debe buscar o seleccionar una cuenta primero");
+                return;
+            }
+
             int id;
             int.TryParse(txtId.Text, out id);
 
-            new FormEstadoYMovimientos(iAM, id).ShowDialog();
+
+                new FormEstadoYMovimientos(iAM, id).ShowDialog();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            if (txtId.Text == "")
+            {
+                MessageBox.Show("Debe buscar o seleccionar una cuenta primero");
+                return;
+            }
+
             DialogResult res = MessageBox.Show("Esta seguro que desea actualizar los datos?", "Confimarcion", MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
@@ -126,6 +152,12 @@ namespace EJ2
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            if (txtId.Text == "")
+            {
+                MessageBox.Show("Debe buscar o seleccionar una cuenta primero");
+                return;
+            }
+
             DialogResult res = MessageBox.Show("Esta seguro que desea eliminar la cuenta con ID: " + txtId.Text + " ?", "Confimarcion", MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
