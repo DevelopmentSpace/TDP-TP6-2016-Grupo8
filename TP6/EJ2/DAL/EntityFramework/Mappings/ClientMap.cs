@@ -6,7 +6,9 @@ namespace EJ2.DAL.EntityFramework.Mappings
 {
     class ClientMap : EntityTypeConfiguration<Client>
     {
-
+        /// <summary>
+        /// Especifica el mapeo para la clase Client
+        /// </summary>
         public ClientMap()
         {
 
