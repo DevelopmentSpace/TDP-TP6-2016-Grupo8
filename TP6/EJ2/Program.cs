@@ -13,25 +13,34 @@ namespace EJ2
     {
         static void Main(string[] args)
         {
-            //En esta parte se hace el mapeo de todos los objetos
+            /*
+             * Agregamos a la configuracion del Automapper los mapeos que vamos a 
+             * utilizar entre las clases de dominio y los DTO
+             */
             AutoMapper.Mapper.Initialize(cfg =>
             {
+                //Mapeo de Client a ClientDTO
                 cfg.CreateMap<Client, ClientDTO>()
                     .ForMember(dest => dest.NumberDocument, opt => opt.MapFrom(src => src.Document.Number))
                     .ForMember(dest => dest.TypeDocument, opt => opt.MapFrom(src => DocTypeAString(src.Document.Type)));
-
+                
+                //Mapeo de ClientDTO a Client
                 cfg.CreateMap<ClientDTO, Client>()
                     .ForMember(dest => dest.Document, opt => opt.MapFrom(src => new Document() { Number = src.NumberDocument, Type = stringADocType(src.TypeDocument) }));
 
+                //Mapeo de Account a AccountDTO
                 cfg.CreateMap<Account, AccountDTO>()
                     .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id))
                     .ForMember(dest => dest.ClientName, opt => opt.MapFrom(src => src.Client.LastName + ", "+src.Client.FirstName));
 
+                //Mapeo de AccountDTO a Account
                 cfg.CreateMap<AccountDTO, Account>()
                     .ForMember(dest => dest.Client, opt => opt.MapFrom(src => new Client()
                     {
                         Id = src.ClientId
                     }));
+
+                //Mapeo de AccountMovement a AccountMovementDTO
                 cfg.CreateMap<AccountMovement, AccountMovementDTO>();
             }
             );
@@ -40,6 +49,8 @@ namespace EJ2
             
             Application.Run(new FormMenu());
         }
+
+
 
         /// <summary>
         /// Convierte de cadena a tipo de documento
