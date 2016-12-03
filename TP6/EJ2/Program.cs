@@ -31,6 +31,7 @@ namespace EJ2
                     {
                         Id = src.ClientId
                     }));
+                cfg.CreateMap<AccountMovement, AccountMovementDTO>();
             }
             );
 

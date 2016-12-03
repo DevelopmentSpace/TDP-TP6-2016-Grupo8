@@ -28,7 +28,12 @@ namespace EJ2.DAL.EntityFramework
                 throw new ArgumentNullException(nameof(pAccount));
             }
 
-            return pAccount.Movements.OrderBy(pMovement => pMovement.Date).Take(pCount);
+            /*
+             * La consulta que sigue estaba al reves
+             * Cambiamos OrderBy por OrderByDescending 
+             */
+            return pAccount.Movements.OrderByDescending(pMovement => pMovement.Date).Take(pCount);
+
         }
 
         public IEnumerable<Account> GetOverdrawnAccounts()
