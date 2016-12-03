@@ -4,24 +4,39 @@ using System.Data.Entity;
 
 namespace EJ2.DAL.EntityFramework
 {
+    /// <summary>
+    /// Especifica el contexto para almacenar Clientes, Cuentas y sus movimientos.
+    /// </summary>
     internal class AccountManagerDbContext : DbContext
     {
+        /// <summary>
+        /// DbSet para Clientes
+        /// </summary>
         public DbSet<Client> Clients { get; set; }
 
+        /// <summary>
+        /// DbSet para Cuentas
+        /// </summary>
         public DbSet<Account> Accounts { get; set; }
 
+        /// <summary>
+        /// DbSet para Movimientos de cuentas
+        /// </summary>
         public DbSet<AccountMovement> AccountMovements { get; set; }
 
+        /// <summary>
+        /// Constrcutor
+        /// </summary>
         public AccountManagerDbContext() : base("AccountManagerContext")
         {
-            //Database.SetInitializer<AccountManagerDbContext>(new CreateDatabaseIfNotExists<AccountManagerDbContext>());
-            //Database.SetInitializer<AccountManagerDbContext>(new DropCreateDatabaseIfModelChanges<AccountManagerDbContext>());
-            //Database.SetInitializer<AccountManagerDbContext>(new DropCreateDatabaseAlways<AccountManagerDbContext>());
-
             // Se establece la estrategia personalizada de inicialización de la BBDD.
             Database.SetInitializer<AccountManagerDbContext>(new DatabaseInitializationStrategy());
         }
 
+        /// <summary>
+        /// Sustitucion del metodo OnModelCreating
+        /// </summary>
+        /// <param name="pModelBuilder">Model builder</param>
         protected override void OnModelCreating(DbModelBuilder pModelBuilder)
         {
             pModelBuilder.Configurations.Add(new ClientMap());

@@ -46,14 +46,19 @@ namespace EJ2.DAL.EntityFramework
         }
 
         /// <summary>
-        /// Obtiene un elemento del repositorio
+        /// Obtiene un elemento por su Id
         /// </summary>
-        /// <param name="pId">Id del elemento a obtener</param>
+        /// <param name="pId">Id del elemento</param>
+        /// <returns>Elemento cuya Id coincida</returns>
         public TEntity Get(int pId)
         {
             return this.iDbContext.Set<TEntity>().Find(pId);
         }
 
+        /// <summary>
+        /// Obtiene todos los elementos en el repositorio
+        /// </summary>
+        /// <returns>Lista de elementos</returns>
         public IEnumerable<TEntity> GetAll()
         {
             return this.iDbContext.Set<TEntity>().ToList();
