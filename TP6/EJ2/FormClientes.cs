@@ -45,7 +45,7 @@ namespace EJ2
             try
             {
                 iAM.AgregarCliente(client);
-                MessageBox.Show("Cuenta agregada");
+                MessageBox.Show("Cliente agregada");
             }
             catch (InvalidOperationException)
             {
@@ -55,8 +55,6 @@ namespace EJ2
             {
                 MessageBox.Show("Los datos ingresados son incorrectos.");
             }
-
-            MessageBox.Show("Cliente agregado");
         }
 
 
@@ -78,9 +76,16 @@ namespace EJ2
             {
                 int id;
                 int.TryParse(txtId.Text, out id);
-                iAM.EliminarCliente(id);
 
-                MessageBox.Show("Cliente eliminado");
+                try
+                {
+                    iAM.EliminarCliente(id);
+                    MessageBox.Show("Cliente eliminado");
+                }
+                catch (InvalidOperationException)
+                {
+                    MessageBox.Show("El cliente no existe");
+                }
             }
                 
         }
@@ -131,9 +136,20 @@ namespace EJ2
                     TypeDocument = (string)cbTipoDoc.SelectedItem
                 };
 
-                iAM.ModificarCliente(client);
+                try
+                {
+                    iAM.ModificarCliente(client);
+                    MessageBox.Show("Cliente eliminado");
+                }
+                catch (InvalidOperationException)
+                {
+                    MessageBox.Show("El cliente no existe");
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("Los datos ingresados son incorrectos.");
+                }
 
-                MessageBox.Show("Cliente actualizado");
             }
         }
     }
