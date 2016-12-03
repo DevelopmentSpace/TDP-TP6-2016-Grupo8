@@ -5,11 +5,18 @@ using System.Data.Entity;
 
 namespace EJ2.DAL.EntityFramework
 {
+    /// <summary>
+    /// Especifica las acciones para inicializar la base de datos
+    /// </summary>
     class DatabaseInitializationStrategy : CreateDatabaseIfNotExists<AccountManagerDbContext>
     {
-
+        /// <summary>
+        /// Semilla
+        /// </summary>
+        /// <param name="pContext">Contexto a utilizar</param>
         protected override void Seed(AccountManagerDbContext pContext)
         {
+            //Agrega clientes con cuentas y movimientos
 
             pContext.Clients.Add(new Client
             {

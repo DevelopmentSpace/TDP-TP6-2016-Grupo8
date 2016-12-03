@@ -21,15 +21,16 @@ namespace EJ2.DAL
         void Remove(TEntity pEntity);
 
         /// <summary>
-        /// Obtiene un elemento del repositorio
+        /// Obtiene un elemento por su Id
         /// </summary>
-        /// <param name="pId">id del elemento a obtener</param>
+        /// <param name="pId">Id del elemento</param>
+        /// <returns>Elemento cuya Id coincida</returns>
         TEntity Get(int pId);
 
         /// <summary>
         /// Obtiene todos los elementos en el repositorio
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Lista de elementos</returns>
         IEnumerable<TEntity> GetAll();
 
     }
