@@ -47,7 +47,7 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tablaCuentas = new System.Windows.Forms.DataGridView();
-            this.btnBuscarIdCliente = new System.Windows.Forms.Button();
+            this.btnVerTodas = new System.Windows.Forms.Button();
             this.btnObtSuperanLim = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
@@ -244,15 +244,15 @@
             this.tablaCuentas.TabIndex = 16;
             this.tablaCuentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaCuentas_CellClick);
             // 
-            // btnBuscarIdCliente
+            // btnVerTodas
             // 
-            this.btnBuscarIdCliente.Location = new System.Drawing.Point(13, 19);
-            this.btnBuscarIdCliente.Name = "btnBuscarIdCliente";
-            this.btnBuscarIdCliente.Size = new System.Drawing.Size(104, 23);
-            this.btnBuscarIdCliente.TabIndex = 24;
-            this.btnBuscarIdCliente.Text = "Ver todas";
-            this.btnBuscarIdCliente.UseVisualStyleBackColor = true;
-            this.btnBuscarIdCliente.Click += new System.EventHandler(this.btnBuscarIdCliente_Click);
+            this.btnVerTodas.Location = new System.Drawing.Point(13, 19);
+            this.btnVerTodas.Name = "btnVerTodas";
+            this.btnVerTodas.Size = new System.Drawing.Size(104, 23);
+            this.btnVerTodas.TabIndex = 24;
+            this.btnVerTodas.Text = "Ver todas";
+            this.btnVerTodas.UseVisualStyleBackColor = true;
+            this.btnVerTodas.Click += new System.EventHandler(this.btnVerTodas_Click);
             // 
             // btnObtSuperanLim
             // 
@@ -268,7 +268,7 @@
             // 
             this.groupBox2.Controls.Add(this.tablaCuentas);
             this.groupBox2.Controls.Add(this.btnObtSuperanLim);
-            this.groupBox2.Controls.Add(this.btnBuscarIdCliente);
+            this.groupBox2.Controls.Add(this.btnVerTodas);
             this.groupBox2.Location = new System.Drawing.Point(12, 172);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(888, 280);
@@ -315,7 +315,7 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView tablaCuentas;
-        private System.Windows.Forms.Button btnBuscarIdCliente;
+        private System.Windows.Forms.Button btnVerTodas;
         private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnObtSuperanLim;
