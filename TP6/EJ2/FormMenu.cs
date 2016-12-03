@@ -26,13 +26,13 @@ namespace EJ2
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Se les pasa la fachada a la pantalla.
+            //Se le pasa la fachada a la pantalla.
             new FormClientes(iAM).ShowDialog();
         }
 
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Se les pasa la fachada a la pantalla
+            //Se le pasa la fachada a la pantalla
             new FormCuentas(iAM).ShowDialog();
         }
     }

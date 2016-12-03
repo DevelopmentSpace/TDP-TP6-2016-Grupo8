@@ -16,6 +16,8 @@ namespace EJ2
         AccountManager iAM;
         int iIdCuenta;
 
+
+
         public FormEstadoYMovimientos(AccountManager pAM, int pIdCuenta)
         {
             InitializeComponent();
@@ -23,6 +25,8 @@ namespace EJ2
             iAM = pAM;
             iIdCuenta = pIdCuenta;
         }
+
+        // - Botones de la interfaz - //
 
         private void btnObtUltMov_Click(object sender, EventArgs e)
         {
@@ -48,20 +52,42 @@ namespace EJ2
 
         private void btnAcreditar_Click(object sender, EventArgs e)
         {
-            int monto;
-            int.TryParse(txtMonto.Text, out monto);
+            double monto;
+            double.TryParse(txtMonto.Text, out monto);
 
-            iAM.AgregarMovimiento(iIdCuenta, monto, txtDesc.Text);
-            this.ActualizarBalance();
+            if (monto == 0.0)
+            {
+                MessageBox.Show("Debes ingresar un monto");
+            }
+            else if (monto < 0.0)
+            {
+                MessageBox.Show("El monto no debe ser negativo");
+            }
+            else
+            {
+                iAM.AgregarMovimiento(iIdCuenta, monto, txtDesc.Text);
+                this.ActualizarBalance();
+            }
         }
 
         private void btnDebitar_Click(object sender, EventArgs e)
         {
-            int monto;
-            int.TryParse(txtMonto.Text, out monto);
+            double monto;
+            double.TryParse(txtMonto.Text, out monto);
 
-            iAM.AgregarMovimiento(iIdCuenta, -monto, txtDesc.Text);
-            this.ActualizarBalance();
+            if (monto == 0.0)
+            {
+                MessageBox.Show("Debes ingresar un monto");
+            }
+            else if (monto < 0.0)
+            {
+                MessageBox.Show("El monto no debe ser negativo");
+            }
+            else
+            {
+                iAM.AgregarMovimiento(iIdCuenta, -monto, txtDesc.Text);
+                this.ActualizarBalance();
+            }
         }
     }
 }
