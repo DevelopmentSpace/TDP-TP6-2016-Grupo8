@@ -13,6 +13,7 @@ namespace EJ2
     {
         static void Main(string[] args)
         {
+            //En esta parte se hace el mapeo de todos los objetos
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Client, ClientDTO>()
@@ -40,6 +41,11 @@ namespace EJ2
             Application.Run(new FormMenu());
         }
 
+        /// <summary>
+        /// Convierte de cadena a tipo de documento
+        /// </summary>
+        /// <param name="pTipoDocumento">Una cadena</param>
+        /// <returns>Un tipo de documento</returns>
         private static DocumentType stringADocType(string pTipoDocumento)
         {
             switch (pTipoDocumento)
@@ -60,6 +66,11 @@ namespace EJ2
             }
         }
 
+        /// <summary>
+        /// Convierte de tipo de documento a cadena
+        /// </summary>
+        /// <param name="pTipoDocumento">Un tipo de documento</param>
+        /// <returns>Una cadena con el tipo de documento</returns>
         private static string DocTypeAString(DocumentType pTipoDocumento)
         {
             switch (pTipoDocumento)
@@ -79,14 +90,5 @@ namespace EJ2
                     throw new ArgumentException("Tipo de documento no Valido");
             }
         }
-
-
-
-
-
-
-
-    }
-
-        
+    }   
 }

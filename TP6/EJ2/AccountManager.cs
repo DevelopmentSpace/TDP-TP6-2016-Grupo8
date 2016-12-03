@@ -10,9 +10,15 @@ using EJ2.DTO;
 
 namespace EJ2
 {
+    /// <summary>
+    /// Fachada de controlador de las cuentas.
+    /// </summary>
     public class AccountManager
     {
-
+        /// <summary>
+        /// Crea una transaccion en el contexto de la base de datos.
+        /// </summary>
+        /// <returns>Transaccion</returns>
         private UnitOfWork CrearTransaccion()
         {
             try
@@ -29,6 +35,10 @@ namespace EJ2
 
         //ADMINISTRACION DE CLIENTES//
 
+        /// <summary>
+        /// Agrega un cliente a la base de datos.
+        /// </summary>
+        /// <param name="pClientDTO">Cliente en forma DTO</param>
         public void AgregarCliente(ClientDTO pClientDTO)
         {
             Client cliente = AutoMapper.Mapper.Map<Client>(pClientDTO);
@@ -50,7 +60,10 @@ namespace EJ2
 
         }
 
-
+        /// <summary>
+        /// Modifica un cliente de la base de datos.
+        /// </summary>
+        /// <param name="pClientDTO">Cliente en forma DTO</param>
         public void ModificarCliente(ClientDTO pClientDTO)
         {
 
@@ -77,7 +90,10 @@ namespace EJ2
         }
 
 
-
+        /// <summary>
+        /// Elimina un cliente de la base de datos.
+        /// </summary>
+        /// <param name="clientId">Cliente en forma DTO</param>
         public void EliminarCliente(int clientId)
         {
 
@@ -96,7 +112,11 @@ namespace EJ2
             transaccion.Dispose();
         }
 
-
+        /// <summary>
+        /// Obtiene un cliente de la base de datos.
+        /// </summary>
+        /// <param name="clientId">Id del cliente</param>
+        /// <returns>Cliente en forma DTO</returns>
         public ClientDTO ObtenerCliente(int clientId)
         {
 
@@ -114,7 +134,10 @@ namespace EJ2
             return client;
         }
 
-
+        /// <summary>
+        /// Obtiene la lista de todos los clientes que se encuentran en la base de datos.
+        /// </summary>
+        /// <returns>Enumerable de todos los clientes en forma DTO</returns>
         public IEnumerable<ClientDTO> ListaClientes()
         {
             UnitOfWork transaccion = this.CrearTransaccion();
@@ -133,6 +156,10 @@ namespace EJ2
 
         //ADMINISTRACION DE CUENTAS//
 
+        /// <summary>
+        /// Agrega una cuenta a la base de datos.
+        /// </summary>
+        /// <param name="pAccountDTO">Cuenta en forma DTO</param>
         public void AgregarCuenta(AccountDTO pAccountDTO)
         {
             Account cuenta = AutoMapper.Mapper.Map<Account>(pAccountDTO);
@@ -155,6 +182,10 @@ namespace EJ2
 
         }
 
+        /// <summary>
+        /// Modifica una cuenta en la base de datos.
+        /// </summary>
+        /// <param name="pCuentaDTO">Cuenta en forma DTO</param>
         public void ModificarCuenta(AccountDTO pCuentaDTO)
         {
 
@@ -180,6 +211,10 @@ namespace EJ2
 
         }
 
+        /// <summary>
+        /// Elimina una cuenta de la base de datos.
+        /// </summary>
+        /// <param name="cuentaId">Id de la cuenta</param>
         public void EliminarCuenta(int cuentaId)
         {
 
@@ -198,6 +233,11 @@ namespace EJ2
             transaccion.Dispose();
         }
 
+        /// <summary>
+        /// Obtiene una cuenta de la base de datos.
+        /// </summary>
+        /// <param name="cuentaId">Id de la cuenta</param>
+        /// <returns>Cuenta en forma DTO</returns>
         public AccountDTO ObtenerCuenta(int cuentaId)
         {
 
@@ -215,7 +255,10 @@ namespace EJ2
             return cuenta;
         }
 
-
+        /// <summary>
+        /// Obtiene una lista de todas las cuentas de la base de datos.
+        /// </summary>
+        /// <returns>Enumerable con todas las cuentas en formato DTO</returns>
         public IEnumerable<AccountDTO> ListaCuentas()
         {
             UnitOfWork transaccion = this.CrearTransaccion();
@@ -228,6 +271,11 @@ namespace EJ2
             return list;
         }
 
+        /// <summary>
+        /// Obtiene el balance de una cuenta.
+        /// </summary>
+        /// <param name="cuentaId">Id de la cuenta</param>
+        /// <returns>Balance</returns>
         public double ObtenerBalance(int cuentaId)
         {
             UnitOfWork transaccion = this.CrearTransaccion();
@@ -240,6 +288,10 @@ namespace EJ2
             return balance;
         }
 
+        /// <summary>
+        /// Obtiene las cuentas que superan el descubierto. 
+        /// </summary>
+        /// <returns>Lista de cuentas en forma DTO que superan el descubierto.</returns>
         public IEnumerable<AccountDTO> ObtenerCuentasSuperanDescubierto()
         {
 
@@ -256,6 +308,12 @@ namespace EJ2
 
         //ADMINISTRACION DE MOVIMIENTOS//
 
+        /// <summary>
+        /// Agrega un movimiento a una cuenta
+        /// </summary>
+        /// <param name="pCuentaId">Id de la cuenta</param>
+        /// <param name="pMonto">Monto a transferir</param>
+        /// <param name="pDescripcion">Descripcion de la transaccion</param>
         public void AgregarMovimiento(int pCuentaId,int pMonto,string pDescripcion)
         {
             UnitOfWork transaccion = this.CrearTransaccion();
@@ -274,7 +332,12 @@ namespace EJ2
 
         }
 
-
+        /// <summary>
+        /// Obtiene los n ultimos movimientos de una cuenta
+        /// </summary>
+        /// <param name="cuentaId">Id de la cuenta</param>
+        /// <param name="nMovimientos">Cantidad de los ultimos movimientos a mostrar</param>
+        /// <returns>Lista con los n movimientos de la cuenta en formato DTO</returns>
         public IEnumerable<AccountMovementDTO> ObtenerNMovimientos(int cuentaId,int nMovimientos)
         {
 

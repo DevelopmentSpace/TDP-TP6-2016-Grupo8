@@ -22,6 +22,8 @@ namespace EJ2
             iAM = new AccountManager();
         }
 
+        // - Botones de la aplicacion - //
+
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new FormClientes(iAM).ShowDialog();
