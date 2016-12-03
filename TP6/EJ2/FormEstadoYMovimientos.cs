@@ -26,8 +26,23 @@ namespace EJ2
             iIdCuenta = pIdCuenta;
         }
 
+        /// <summary>
+        /// Muestra el balance de la cuenta en pantalla
+        /// </summary>
+        private void ActualizarBalance()
+        {
+            txtBalance.Text = iAM.ObtenerBalance(iIdCuenta).ToString();
+        }
+
+        private void FormEstadoYMovimientos_Load(object sender, EventArgs e)
+        {
+            this.ActualizarBalance();
+            txtIdCuenta.Text = iIdCuenta.ToString();
+        }
+
         // - Botones de la interfaz - //
 
+        //Boton obtener ultimo movimiento
         private void btnObtUltMov_Click(object sender, EventArgs e)
         {
             int cant;
@@ -45,17 +60,7 @@ namespace EJ2
             tablaMovimientos.Refresh();
         }
 
-        private void FormEstadoYMovimientos_Load(object sender, EventArgs e)
-        {
-            this.ActualizarBalance();
-            txtIdCuenta.Text = iIdCuenta.ToString();
-        }
-
-        private void ActualizarBalance()
-        {
-           txtBalance.Text=iAM.ObtenerBalance(iIdCuenta).ToString();
-        }
-
+        //Boton acreditar
         private void btnAcreditar_Click(object sender, EventArgs e)
         {
             double monto;
@@ -77,6 +82,7 @@ namespace EJ2
             }
         }
 
+        //Boton debitar
         private void btnDebitar_Click(object sender, EventArgs e)
         {
             double monto;

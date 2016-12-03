@@ -20,6 +20,7 @@ namespace EJ2
             InitializeComponent();
             iAM = pAM;
 
+            //Se agregan los tipos de documento a el combobox
             cbTipoDoc.Items.Add("DNI");
             cbTipoDoc.Items.Add("CUIL");
             cbTipoDoc.Items.Add("LC");
@@ -32,6 +33,9 @@ namespace EJ2
 
         }
 
+        // - Botones de la pantalla - //
+
+        //Boton agregar
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if(cbTipoDoc.SelectedItem == null)
@@ -39,6 +43,7 @@ namespace EJ2
                 MessageBox.Show("Seleccione un tipo de documento");
                 return;
             }
+            //Crea el cliente
             ClientDTO client = new ClientDTO()
             {
                 FirstName = txtNombre.Text,
@@ -62,7 +67,7 @@ namespace EJ2
             }
         }
 
-
+        //Boton de obtener todos los clientes
         private void btnObtTodos_Click(object sender, EventArgs e)
         {
             IEnumerable<ClientDTO> enuCli = iAM.ListaClientes();
@@ -73,6 +78,7 @@ namespace EJ2
 
         }
 
+        //Boton eliminar un cliente
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "")
@@ -114,6 +120,7 @@ namespace EJ2
             cbTipoDoc.SelectedItem = row.Cells[1].Value.ToString();
     }
 
+        //Boton buscar cliente
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             int id;
@@ -133,6 +140,8 @@ namespace EJ2
             }
         }
 
+
+        //Boton modificar
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "")

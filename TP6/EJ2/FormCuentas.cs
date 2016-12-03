@@ -23,6 +23,9 @@ namespace EJ2
             tablaCuentas.DataSource = new List<AccountDTO> { };
         }
 
+        //  - Botones de la pantalla - //
+
+        //Boton agregar
         private void btnAgregar_Click(object sender, EventArgs e)
         {
 
@@ -57,6 +60,7 @@ namespace EJ2
             
         }
 
+        //Boton de buscar
         private void btnBuscarId_Click(object sender, EventArgs e)
         {
             int id;
@@ -75,13 +79,13 @@ namespace EJ2
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("No exsite una cuenta con el Id ingresado");
+                MessageBox.Show("No existe una cuenta con el Id ingresado");
             }  
             
         }
 
 
-
+        //Boton de ver todas
         private void btnVerTodas_Click(object sender, EventArgs e)
         {
             IEnumerable<AccountDTO> enuCli = iAM.ListaCuentas();
@@ -91,7 +95,7 @@ namespace EJ2
         }
 
 
-
+        //Boton de obtener los que superaron el limite
         private void btnObtSuperanLim_Click(object sender, EventArgs e)
         {
             IEnumerable<AccountDTO> enuCli = iAM.ObtenerCuentasSuperanDescubierto();
@@ -100,7 +104,7 @@ namespace EJ2
             tablaCuentas.Refresh();
         }
 
-
+        //Boton de detalle y movimientos
         private void btnDetalleYMov_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "")
@@ -112,10 +116,10 @@ namespace EJ2
             int id;
             int.TryParse(txtId.Text, out id);
 
-
-                new FormEstadoYMovimientos(iAM, id).ShowDialog();
+            new FormEstadoYMovimientos(iAM, id).ShowDialog();
         }
-
+        
+        //Boton modificar 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "")
@@ -162,6 +166,7 @@ namespace EJ2
             }
         }
 
+        //Boton eliminar
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "")
