@@ -49,7 +49,7 @@ namespace EJ2
             }
             catch(InvalidOperationException)
             {
-                MessageBox.Show("El cliente ya existe");
+                MessageBox.Show("El cliente no existe");
             }
             catch(ArgumentException)
             {

@@ -41,8 +41,20 @@ namespace EJ2
                 NumberDocument = txtNumeroDoc.Text,
                 TypeDocument = cbTipoDoc.SelectedItem.ToString()
             };
-
-            iAM.AgregarCliente(client);
+     
+            try
+            {
+                iAM.AgregarCliente(client);
+                MessageBox.Show("Cuenta agregada");
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("El cliente ya existe");
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Los datos ingresados son incorrectos.");
+            }
 
             MessageBox.Show("Cliente agregado");
         }
