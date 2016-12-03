@@ -36,6 +36,7 @@ namespace EJ2
             if (cant <= 0)
             {
                 MessageBox.Show("Ingrese una cantidad mayor a 0");
+                return;
             }
 
             IEnumerable<AccountMovementDTO> enuCli = iAM.ObtenerNMovimientos(iIdCuenta, cant);

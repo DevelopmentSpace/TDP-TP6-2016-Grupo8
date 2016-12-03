@@ -34,6 +34,11 @@ namespace EJ2
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if(cbTipoDoc.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un tipo de documento");
+                return;
+            }
             ClientDTO client = new ClientDTO()
             {
                 FirstName = txtNombre.Text,
@@ -45,7 +50,7 @@ namespace EJ2
             try
             {
                 iAM.AgregarCliente(client);
-                MessageBox.Show("Cliente agregada");
+                MessageBox.Show("Cliente agregado");
             }
             catch (InvalidOperationException)
             {
@@ -70,7 +75,12 @@ namespace EJ2
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
- 
+            if (txtId.Text == "")
+            {
+                MessageBox.Show("Debe buscar o seleccionar un cliente primero");
+                return;
+            }
+
             DialogResult res = MessageBox.Show("Esta seguro que desea eliminar el cliente con ID: "+txtId.Text+" ?","Confimarcion",MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
@@ -108,19 +118,29 @@ namespace EJ2
         {
             int id;
             int.TryParse(txtBuscar.Text, out id);
+            try {
+                ClientDTO cliente = iAM.ObtenerCliente(id);
 
-            ClientDTO cliente = iAM.ObtenerCliente(id);
-
-            txtId.Text = cliente.Id.ToString();
-            txtNombre.Text = cliente.FirstName;
-            txtApellido.Text = cliente.LastName;
-            txtNumeroDoc.Text = cliente.NumberDocument;
-            cbTipoDoc.SelectedItem = cliente.TypeDocument;
-
+                txtId.Text = cliente.Id.ToString();
+                txtNombre.Text = cliente.FirstName;
+                txtApellido.Text = cliente.LastName;
+                txtNumeroDoc.Text = cliente.NumberDocument;
+                cbTipoDoc.SelectedItem = cliente.TypeDocument;
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("No exsite un cliente con el Id ingresado");
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            if (txtId.Text == "")
+            {
+                MessageBox.Show("Debe buscar o seleccionar un cliente primero");
+                return;
+            }
+
             DialogResult res = MessageBox.Show("Esta seguro que desea actualizar los datos?", "Confimarcion", MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
@@ -139,7 +159,7 @@ namespace EJ2
                 try
                 {
                     iAM.ModificarCliente(client);
-                    MessageBox.Show("Cliente eliminado");
+                    MessageBox.Show("Cliente actualizado");
                 }
                 catch (InvalidOperationException)
                 {

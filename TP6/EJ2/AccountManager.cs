@@ -223,7 +223,13 @@ namespace EJ2
                 throw new InvalidOperationException("La cuenta no existe");
             }
 
-            cuenta.Client = transaccion.ClientRepository.Get(cuentaAct.Client.Id);
+            Client cliente = transaccion.ClientRepository.Get(cuentaAct.Client.Id);
+            if (cliente == null)
+            {
+                throw new ArgumentException("Datos no validos");
+            }
+            cuenta.Client = cliente;
+
             cuenta.Name = cuentaAct.Name;
             cuenta.OverdraftLimit = cuentaAct.OverdraftLimit;
 
