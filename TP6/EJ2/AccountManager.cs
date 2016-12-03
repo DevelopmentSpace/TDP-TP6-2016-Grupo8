@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EJ2.DTO;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace EJ2
 {
@@ -49,9 +51,13 @@ namespace EJ2
                 transaccion.ClientRepository.Add(cliente);
                 transaccion.Complete();
             }
-            catch (Exception)
+            catch (DbUpdateException)
             {
-                throw new InvalidOperationException("El Cliente ya existe");
+                throw new InvalidOperationException("El cliente ya existe");
+            }
+            catch(DbEntityValidationException)
+            {
+                throw new ArgumentException("Datos no validos");
             }
             finally
             {
@@ -171,9 +177,13 @@ namespace EJ2
                 transaccion.AccountRepository.Add(cuenta);
                 transaccion.Complete();
             }
-            catch (Exception)
+            catch (DbUpdateException)
             {
-                throw new InvalidOperationException("La cuenta ya existe");
+                throw new InvalidOperationException("El cliente ya existe");
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new ArgumentException("Datos no validos");
             }
             finally
             {
