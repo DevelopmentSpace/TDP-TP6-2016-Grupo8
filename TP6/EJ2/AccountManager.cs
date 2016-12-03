@@ -179,7 +179,7 @@ namespace EJ2
             }
             catch (DbUpdateException)
             {
-                throw new InvalidOperationException("El cliente ya existe");
+                throw new InvalidOperationException("El cliente no existe");
             }
             catch (DbEntityValidationException)
             {
