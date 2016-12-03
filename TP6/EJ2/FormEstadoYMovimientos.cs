@@ -33,6 +33,11 @@ namespace EJ2
             int cant;
             int.TryParse(txtCantMov.Text, out cant);
 
+            if (cant <= 0)
+            {
+                MessageBox.Show("Ingrese una cantidad mayor a 0");
+            }
+
             IEnumerable<AccountMovementDTO> enuCli = iAM.ObtenerNMovimientos(iIdCuenta, cant);
 
             tablaMovimientos.DataSource = enuCli;
@@ -67,6 +72,7 @@ namespace EJ2
             {
                 iAM.AgregarMovimiento(iIdCuenta, monto, txtDesc.Text);
                 this.ActualizarBalance();
+                MessageBox.Show("La operacion se realizo exitosamente");
             }
         }
 
@@ -87,6 +93,7 @@ namespace EJ2
             {
                 iAM.AgregarMovimiento(iIdCuenta, -monto, txtDesc.Text);
                 this.ActualizarBalance();
+                MessageBox.Show("La operacion se realizo exitosamente");
             }
         }
     }

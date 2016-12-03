@@ -75,7 +75,7 @@ namespace EJ2
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("No exsite una cuenta con el Id ingresado.");
+                MessageBox.Show("No exsite una cuenta con el Id ingresado");
             }  
             
         }
@@ -143,10 +143,22 @@ namespace EJ2
                     ClientId = clientId,
                     OverdraftLimit = limite
                 };
+                try
+                {
+                    iAM.ModificarCuenta(account);
+                    MessageBox.Show("Cuenta actualizada");
+                }
+                catch (InvalidOperationException)
+                {
+                    MessageBox.Show("La cuenta no existe");
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("Los datos ingresados son incorrectos.");
+                }
 
-                iAM.ModificarCuenta(account);
 
-                MessageBox.Show("Cuenta actualizada");
+
             }
         }
 
@@ -163,9 +175,17 @@ namespace EJ2
             {
                 int id;
                 int.TryParse(txtId.Text, out id);
-                iAM.EliminarCuenta(id);
+                try
+                {
+                    MessageBox.Show("Cuenta eliminada");
+                    iAM.EliminarCuenta(id);
+                }
+                catch(InvalidOperationException)
+                {
+                    MessageBox.Show("La cuenta no existe");
+                }
 
-                MessageBox.Show("Cuenta eliminada");
+               
             }
         }
 
