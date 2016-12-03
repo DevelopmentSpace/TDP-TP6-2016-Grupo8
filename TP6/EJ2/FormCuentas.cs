@@ -42,10 +42,19 @@ namespace EJ2
                 ClientId = clientId,
                 OverdraftLimit = limite
             };
-
-            iAM.AgregarCuenta(account);
-
-            MessageBox.Show("Cuenta agregada");
+            try
+            { 
+                iAM.AgregarCuenta(account);
+                MessageBox.Show("Cuenta agregada");
+            }
+            catch(InvalidOperationException)
+            {
+                MessageBox.Show("El cliente ya existe");
+            }
+            catch(ArgumentException)
+            {
+                MessageBox.Show("Los datos ingresados son incorrectos.");
+            }
         }
 
         private void btnBuscarId_Click(object sender, EventArgs e)
